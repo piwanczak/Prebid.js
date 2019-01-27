@@ -24,7 +24,8 @@ Please reach out to pmp@rtbhouse.com to receive your own
                        params: {
                            region: 'prebid-eu',
                            publisherId: 'PREBID_TEST_ID',
-                           bidfloor: 0.01  // optional
+                           bidfloor: 0.01,  // optional
+                           viewability: 0.1 // viewability according to MRC, range 0 -> 1 
                        }
                    }
                ]

@@ -158,6 +158,15 @@ describe('RTBHouseAdapter', () => {
       expect(data.imp[0].bidfloor).to.equal(0.01)
     });
 
+    it('should include viewability in request if available', () => {
+      const bidRequest = Object.assign([], bidRequests);
+      bidRequest[0].params.viewability = 0.1;
+      const request = spec.buildRequests(bidRequest, bidderRequest);
+      const data = JSON.parse(request.data);
+      expect(data.imp[0].metric[0].value).to.equal(0.1);
+      expect(data.imp[0].metric[0].type).to.equal('viewability');
+    });
+
     describe('native imp', () => {
       function basicRequest(extension) {
         return Object.assign({
