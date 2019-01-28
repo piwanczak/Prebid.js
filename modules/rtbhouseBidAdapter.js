@@ -96,12 +96,23 @@ function mapImpression(slot) {
     id: slot.bidId,
     banner: mapBanner(slot),
     native: mapNative(slot),
-    tagid: slot.adUnitCode.toString()
+    tagid: slot.adUnitCode.toString(),
   };
 
   const bidfloor = parseFloat(slot.params.bidfloor);
   if (bidfloor) {
     imp.bidfloor = bidfloor
+  }
+
+  const viewability = parseFloat(slot.params.viewability);
+  if (viewability) {
+    imp.metric = [{
+      type: 'viewability',
+      vendor: 'proprietary',
+      value: isNaN(viewability)
+        ? 0
+        : viewability > 1 ? 0 : viewability
+    }];
   }
 
   return imp;
